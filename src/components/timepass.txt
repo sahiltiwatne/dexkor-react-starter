@@ -1,0 +1,85 @@
+// src/components/Sidebar.jsx
+import React, { useState, useEffect } from "react";
+
+function Sidebar({ darkMode, activeSection, setActiveSection }) {
+  const [slideIn, setSlideIn] = useState(false);
+
+  const menuItems = ["Tickets", "Knowledge based URL"];
+
+  useEffect(() => {
+    const timer = setTimeout(() => setSlideIn(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <div
+      className={`transform transition-transform duration-700 ease-out ${
+        slideIn ? "translate-x-0" : "-translate-x-full"
+      } w-full rounded-2xl p-4 space-y-4`}
+    >
+      {menuItems.map((item) => (
+        <button
+          key={item}
+          onClick={() => setActiveSection(item)}
+          className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-300 ${
+            activeSection === item
+              ? darkMode
+                ? "bg-gray-300 text-black font-semibold"
+                : "bg-black text-white font-semibold"
+              : darkMode
+              ? "text-white hover:bg-gray-700"
+              : "text-black hover:bg-gray-200"
+          }`}
+        >
+          {item}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default Sidebar;
+
+
+{/* Top Right */}
+        <div className="flex justify-between items-center gap-4">
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className={`px-3 py-1 rounded-full ${
+              darkMode ? "bg-[#333] text-white" : "bg-gray-200 text-black"
+            }`}
+          >
+            {sidebarOpen ? "⬅️" : "➡️"}
+          </button>
+
+          <div className="flex gap-4 items-center">
+            <Toggle enabled={darkMode} setEnabled={setDarkMode} />
+            <button
+              className={`px-4 py-2 rounded-full ${
+                darkMode ? "bg-[#333] text-white" : "bg-gray-200 text-black"
+              }`}
+            >
+              Log in
+            </button>
+          </div>
+        </div>
+
+
+
+
+        <ul className="space-y-2">
+              {["Ticket #1", "Ticket #2", "Ticket #3"].map((ticket, idx) => (
+                <li
+                  key={idx}
+                  onClick={() => setSelectedTicket(ticket)}
+                  className={`cursor-pointer px-3 py-2 rounded-md transition-all duration-200 ${
+                    selectedTicket === ticket
+                      ? "bg-blue-500 text-white shadow-md border border-blue-700"
+                      : "bg-gray-500/10 hover:bg-gray-500/20"
+                  }`}
+                >
+                  {ticket}
+                </li>
+              ))}
+            </ul>
+          </>
